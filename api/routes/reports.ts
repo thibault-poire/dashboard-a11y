@@ -1,21 +1,17 @@
 import express from "express";
 
-const router = express.Router();
+import { create_collection_report } from "../helpers/mongoose/reports/create_report";
+import get_reports from "../helpers/mongoose/reports/get_reports";
 
-router
+const reports_routes = express.Router();
+
+reports_routes
   .route("/reports")
-
-  .get((_, response) => {
-    response.json({ message: "get all reports" });
+  .get((request, response) => {
+    get_reports(response);
   })
-
-  .post((_, response) => {
-    response.status(201);
-    response.json({ message: "report created" });
+  .post(({ query: { collection_id, url_ids } }, response) => {
+    create_collection_report(response, collection_id as string);
   });
 
-router.route("/reports/:id").get((request, response) => {
-  response.json({ message: `get ${request.params.id} report` });
-});
-
-export default router;
+export default reports_routes;

@@ -1,11 +1,10 @@
 import express from "express";
 import body_parser from "body-parser";
 
-import audits from "./routes/audits";
-import collections from "./routes/collections";
-import reports from "./routes/reports";
+import collections_routes from "./routes/collections";
+import reports_routes from "./routes/reports";
 
-import { init_db } from "./helpers/mongoose";
+import mongoose_connection from "./helpers/mongoose/mongoose_connection";
 
 const server = express();
 
@@ -16,14 +15,14 @@ server.get("/", (_, response) => {
 server.use(body_parser.json());
 server.use(body_parser.urlencoded({ extended: true }));
 
-server.use("/api", audits, collections, reports);
+server.use("/api", collections_routes, reports_routes);
 
 server.all("*", (_, response) => {
   response.status(404);
   response.json({ message: "Not found" });
 });
 
-init_db(() => {
+mongoose_connection(() => {
   server.listen(1337, () => {
     console.log("server listening on port 1337");
   });

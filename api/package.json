@@ -9,10 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@axe-core/cli": "^4.9.1",
+    "@axe-core/puppeteer": "^4.9.1",
     "body-parser": "^1.20.2",
     "express": "^4.19.2",
+    "minimist": "^1.2.8",
     "mongoose": "^8.5.1",
+    "puppeteer": "^22.14.0",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {

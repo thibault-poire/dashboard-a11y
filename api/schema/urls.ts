@@ -1,17 +1,16 @@
 import mongoose from "mongoose";
+import { reports_schema } from "./reports";
 
-import { urls_schema } from "./urls";
-
-export const collections_schema = new mongoose.Schema(
+export const urls_schema = new mongoose.Schema(
   {
-    name: {
+    url: {
       required: true,
       type: String,
     },
 
-    urls: {
-      type: [urls_schema],
-      default: undefined,
+    reports: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "reports",
     },
   },
   {
