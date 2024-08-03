@@ -16,53 +16,53 @@ const collections_routes = express.Router();
 collections_routes
   .route("/collections")
 
-  .get((_, response) => {
-    get_collections(response);
+  .get(async (_, response) => {
+    await get_collections(response);
   })
 
-  .post(({ body }, response) => {
-    create_collection(response, body);
+  .post(async ({ body }, response) => {
+    await create_collection(response, body);
   });
 
 collections_routes
   .route("/collections/:collection_id")
 
-  .get(({ params: { collection_id } }, response) => {
-    get_collection(response, collection_id);
+  .get(async ({ params: { collection_id } }, response) => {
+    await get_collection(response, collection_id);
   })
 
-  .patch(({ body, params: { collection_id } }, response) => {
-    patch_collection(response, collection_id, body);
+  .patch(async ({ body, params: { collection_id } }, response) => {
+    await patch_collection(response, collection_id, body);
   })
 
-  .delete(({ params: { collection_id } }, response) => {
-    delete_collection(response, collection_id);
+  .delete(async ({ params: { collection_id } }, response) => {
+    await delete_collection(response, collection_id);
   });
 
 collections_routes
   .route("/collections/:collection_id/urls")
 
-  .get(({ params: { collection_id } }, response) => {
-    get_collection_urls(response, collection_id);
+  .get(async ({ params: { collection_id } }, response) => {
+    await get_collection_urls(response, collection_id);
   })
 
-  .post(({ body, params: { collection_id } }, response) => {
-    create_collection_urls(response, collection_id, body);
+  .post(async ({ body, params: { collection_id } }, response) => {
+    await create_collection_urls(response, collection_id, body);
   });
 
 collections_routes
   .route("/collections/:collection_id/urls/:url_id")
 
-  .get(({ params: { collection_id, url_id } }, response) => {
-    get_collection_url(response, collection_id, url_id);
+  .get(async ({ params: { collection_id, url_id } }, response) => {
+    await get_collection_url(response, collection_id, url_id);
   })
 
-  .patch(({ params: { collection_id, url_id }, body }, response) => {
-    patch_collection_url(response, collection_id, url_id, body);
+  .patch(async ({ params: { collection_id, url_id }, body }, response) => {
+    await patch_collection_url(response, collection_id, url_id, body);
   })
 
-  .delete(({ params: { collection_id, url_id } }, response) => {
-    delete_collection_url(response, collection_id, url_id);
+  .delete(async ({ params: { collection_id, url_id } }, response) => {
+    await delete_collection_url(response, collection_id, url_id);
   });
 
 export default collections_routes;

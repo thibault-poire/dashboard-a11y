@@ -3,26 +3,29 @@ import { MongooseError } from "mongoose";
 
 import Collections from "../../../models/collections";
 
-export default function patch_collection(
+export default async function patch_collection(
   response: Response,
   collection_id: string,
   updates: object
 ) {
-  Collections.findByIdAndUpdate(collection_id, updates, { new: true })
-    .then((collection) => {
-      if (collection) {
-        response.status(200);
-        response.json(collection);
+  try {
+    const collection = await Collections.findByIdAndUpdate(
+      collection_id,
+      updates,
+      { new: true }
+    );
 
-        return;
-      }
+    if (collection) {
+      response.status(200);
+      response.json(collection);
+      return;
+    }
 
-      response.sendStatus(404);
-    })
-
-    .catch((error: MongooseError) => {
+    response.sendStatus(404);
+  } catch (error) {
+    if (error instanceof MongooseError) {
       console.log(error.message);
-
       response.sendStatus(400);
-    });
+    }
+  }
 }

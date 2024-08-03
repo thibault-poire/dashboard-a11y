@@ -3,22 +3,21 @@ import { MongooseError } from "mongoose";
 
 import Reports from "../../../models/reports";
 
-export default function get_reports(response: Response) {
-  Reports.find({})
-    .then((reports) => {
-      if (reports?.length) {
-        response.status(200);
-        response.json(reports);
+export default async function get_reports(response: Response) {
+  try {
+    const reports = await Reports.find({});
 
-        return;
-      }
+    if (reports?.length) {
+      response.status(200);
+      response.json(reports);
+      return;
+    }
 
-      response.sendStatus(404);
-    })
-
-    .catch((error: MongooseError) => {
+    response.sendStatus(404);
+  } catch (error) {
+    if (error instanceof MongooseError) {
       console.log(error.message);
-
       response.sendStatus(400);
-    });
+    }
+  }
 }

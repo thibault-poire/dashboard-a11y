@@ -1,7 +1,32 @@
 import mongoose from "mongoose";
 
 export const reports_schema = new mongoose.Schema(
-  { any: {} },
+  {
+    inapplicable: {
+      required: true,
+      type: [Array],
+    },
+
+    incomplete: {
+      required: true,
+      type: [Array],
+    },
+
+    passes: {
+      required: true,
+      type: [Array],
+    },
+
+    url: {
+      required: true,
+      type: String,
+    },
+
+    violations: {
+      required: true,
+      type: [Array],
+    },
+  },
   {
     strict: "throw",
     timestamps: {

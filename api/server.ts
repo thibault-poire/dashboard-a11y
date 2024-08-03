@@ -4,26 +4,28 @@ import body_parser from "body-parser";
 import collections_routes from "./routes/collections";
 import reports_routes from "./routes/reports";
 
-import mongoose_connection from "./helpers/mongoose/mongoose_connection";
+import database_connection from "./helpers/mongoose/database_connection";
 
-const server = express();
+(async () => {
+  const server = express();
 
-server.get("/", (_, response) => {
-  response.json({ message: "Hello stranger" });
-});
+  server.get("/", (_, response) => {
+    response.json({ message: "Hello stranger" });
+  });
 
-server.use(body_parser.json());
-server.use(body_parser.urlencoded({ extended: true }));
+  server.use(body_parser.json());
+  server.use(body_parser.urlencoded({ extended: true }));
 
-server.use("/api", collections_routes, reports_routes);
+  server.use("/api", collections_routes, reports_routes);
 
-server.all("*", (_, response) => {
-  response.status(404);
-  response.json({ message: "Not found" });
-});
+  server.all("*", (_, response) => {
+    response.status(404);
+    response.json({ message: "Not found" });
+  });
 
-mongoose_connection(() => {
+  await database_connection();
+
   server.listen(1337, () => {
     console.log("server listening on port 1337");
   });
-});
+})();

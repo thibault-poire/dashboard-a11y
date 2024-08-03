@@ -3,25 +3,24 @@ import { MongooseError } from "mongoose";
 
 import Collections from "../../../../models/collections";
 
-export default function get_collection_urls(
+export default async function get_collection_urls(
   response: Response,
   collection_id: string
 ) {
-  Collections.findById({ _id: collection_id })
-    .then((collection) => {
-      if (collection?.urls?.length) {
-        response.status(200);
-        response.json(collection.urls);
+  try {
+    const collection = await Collections.findById({ _id: collection_id });
 
-        return;
-      }
+    if (collection?.urls?.length) {
+      response.status(200);
+      response.json(collection.urls);
+      return;
+    }
 
-      response.sendStatus(404);
-    })
-
-    .catch((error: MongooseError) => {
+    response.sendStatus(404);
+  } catch (error) {
+    if (error instanceof MongooseError) {
       console.log(error.message);
-
       response.sendStatus(400);
-    });
+    }
+  }
 }

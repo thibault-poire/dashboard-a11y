@@ -7,9 +7,11 @@ const reports_routes = express.Router();
 
 reports_routes
   .route("/reports")
-  .get((request, response) => {
+
+  .get(async (_, response) => {
     get_reports(response);
   })
+
   .post(({ query: { collection_id, url_ids } }, response) => {
     create_collection_report(response, collection_id as string);
   });

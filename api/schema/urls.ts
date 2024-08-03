@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { reports_schema } from "./reports";
 
 export const urls_schema = new mongoose.Schema(
   {

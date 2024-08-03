@@ -3,19 +3,19 @@ import { MongooseError } from "mongoose";
 
 import Collections from "../../../models/collections";
 
-export default function create_collection(
+export default async function create_collection(
   response: Response,
   document: object
 ) {
-  Collections.create(document)
-    .then((collection) => {
-      response.status(201);
-      response.json(collection);
-    })
+  try {
+    const collection = await Collections.create(document);
 
-    .catch((error: MongooseError) => {
+    response.status(201);
+    response.json(collection);
+  } catch (error) {
+    if (error instanceof MongooseError) {
       console.log(error.message);
-
       response.sendStatus(400);
-    });
+    }
+  }
 }
