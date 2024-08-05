@@ -25,7 +25,7 @@ export default async function patch_collection_url(
 
     if (collection?.urls?.length) {
       response.status(200);
-      response.json(collection);
+      response.json(collection.urls[0]);
       return;
     }
 
