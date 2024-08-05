@@ -6,6 +6,7 @@ import database_connection from "./mongoose/database_connection";
 
 import Collections from "../models/collections";
 import mongoose from "mongoose";
+import Reports from "../models/reports";
 
 const { collection_id } = minimist(process.argv);
 
@@ -20,11 +21,35 @@ const { collection_id } = minimist(process.argv);
       const page = await browser.newPage();
 
       for (let index = 0; index < collection.urls.length; index++) {
-        await page.goto(collection.urls[index].url);
+        const { url, _id: url_id } = collection.urls[index];
 
         try {
-          const results = await new AxePuppeteer(page).analyze();
-          console.log(results);
+          await page.goto(url);
+
+          try {
+            const { inapplicable, incomplete, passes, violations } =
+              await new AxePuppeteer(page).analyze();
+
+            const { _id: report_id } = await Reports.create({
+              inapplicable,
+              incomplete,
+              passes,
+              status: 1,
+              url,
+              violations,
+            });
+
+            await Collections.updateOne(
+              { _id: collection_id, "urls._id": url_id },
+              {
+                $push: {
+                  "urls.$.reports": report_id,
+                },
+              }
+            );
+          } catch (error) {
+            console.log(error);
+          }
         } catch (error) {
           console.log(error);
         }
@@ -36,5 +61,7 @@ const { collection_id } = minimist(process.argv);
     console.log(error);
   } finally {
     await mongoose.disconnect();
+
+    console.log("terminated");
   }
 })();

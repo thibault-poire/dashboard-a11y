@@ -8,7 +8,7 @@ export const urls_schema = new mongoose.Schema(
     },
 
     reports: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: [mongoose.Schema.Types.ObjectId],
       ref: "reports",
     },
   },

@@ -3,18 +3,20 @@ import mongoose from "mongoose";
 export const reports_schema = new mongoose.Schema(
   {
     inapplicable: {
-      required: true,
       type: [Array],
     },
 
     incomplete: {
-      required: true,
       type: [Array],
     },
 
     passes: {
-      required: true,
       type: [Array],
+    },
+
+    status: {
+      required: true,
+      type: Number,
     },
 
     url: {
@@ -23,7 +25,6 @@ export const reports_schema = new mongoose.Schema(
     },
 
     violations: {
-      required: true,
       type: [Array],
     },
   },
