@@ -9,10 +9,10 @@ export default async function delete_collection_url(
   url_id: string
 ) {
   try {
-    const collection = await Collections.findOneAndDelete({
-      _id: collection_id,
-      "urls._id": url_id,
-    });
+    const collection = await Collections.updateOne(
+      { _id: collection_id },
+      { $pull: { urls: { _id: url_id } } }
+    );
 
     if (collection) {
       response.sendStatus(204);
