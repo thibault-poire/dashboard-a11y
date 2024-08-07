@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 
 export const urls_schema = new mongoose.Schema(
   {
-    url: {
-      required: true,
-      type: String,
-    },
-
     reports: {
       type: [mongoose.Schema.Types.ObjectId],
       ref: "reports",
+    },
+
+    url: {
+      required: true,
+      type: String,
     },
   },
   {

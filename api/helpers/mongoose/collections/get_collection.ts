@@ -1,7 +1,7 @@
 import { Response } from "express";
 import { MongooseError } from "mongoose";
 
-import Collections from "../../../models/collections";
+import Collections from "../../../mongoose/models/collections";
 
 export default async function get_collection(
   response: Response,

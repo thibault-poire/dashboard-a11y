@@ -1,7 +1,7 @@
 import { Response } from "express";
 import { MongooseError } from "mongoose";
 
-import Reports from "../../../models/reports";
+import Reports from "../../../mongoose/models/reports";
 
 export default async function get_reports(response: Response) {
   try {

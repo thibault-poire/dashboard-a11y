@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 export const reports_schema = new mongoose.Schema(
   {
+    collection_id: {
+      type: mongoose.Types.ObjectId,
+    },
+
     inapplicable: {
       type: [Array],
     },
@@ -19,9 +23,9 @@ export const reports_schema = new mongoose.Schema(
       type: Number,
     },
 
-    url: {
+    url_id: {
       required: true,
-      type: String,
+      type: mongoose.Types.ObjectId,
     },
 
     violations: {

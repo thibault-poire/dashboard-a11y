@@ -4,9 +4,10 @@ import puppeteer from "puppeteer";
 
 import database_connection from "./mongoose/database_connection";
 
-import Collections from "../models/collections";
 import mongoose from "mongoose";
-import Reports from "../models/reports";
+
+import Collections from "../mongoose/models/collections";
+import Reports from "../mongoose/models/reports";
 
 const { collection_id } = minimist(process.argv);
 
@@ -31,15 +32,16 @@ const { collection_id } = minimist(process.argv);
               await new AxePuppeteer(page).analyze();
 
             const { _id: report_id } = await Reports.create({
+              collection_id,
               inapplicable,
               incomplete,
               passes,
               status: 1,
-              url,
+              url_id,
               violations,
             });
 
-            await Collections.updateOne(
+            await Collections.findOneAndUpdate(
               { _id: collection_id, "urls._id": url_id },
               {
                 $push: {

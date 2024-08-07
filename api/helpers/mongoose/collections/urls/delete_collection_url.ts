@@ -1,7 +1,7 @@
 import { Response } from "express";
 import { MongooseError } from "mongoose";
 
-import Collections from "../../../../models/collections";
+import Collections from "../../../../mongoose/models/collections";
 
 export default async function delete_collection_url(
   response: Response,
@@ -9,7 +9,7 @@ export default async function delete_collection_url(
   url_id: string
 ) {
   try {
-    const collection = await Collections.updateOne(
+    const collection = await Collections.findOneAndUpdate(
       { _id: collection_id },
       { $pull: { urls: { _id: url_id } } }
     );
