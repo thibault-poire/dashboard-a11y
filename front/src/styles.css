@@ -1,9 +1,7 @@
-html,
-body {
-  height: 100%;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  @apply bg-container-tertiary font-sans;
 }

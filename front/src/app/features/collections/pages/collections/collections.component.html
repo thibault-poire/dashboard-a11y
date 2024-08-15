@@ -1,0 +1,19 @@
+<app-layout>
+  <section class="flex flex-col gap-8">
+    <header class="col-span-12">
+      <app-title variant="heading">Collections</app-title>
+    </header>
+
+    @if (collections) {
+      <div class="grid grid-cols-3 gap-4">
+        @for (collection of collections; track collection._id) {
+          <app-card
+            class="col-span-1"
+            [name]="collection.name"
+            [urls]="collection.urls.length"
+          />
+        }
+      </div>
+    }
+  </section>
+</app-layout>

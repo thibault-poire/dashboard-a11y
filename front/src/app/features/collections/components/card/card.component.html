@@ -1,0 +1,31 @@
+<article class="grid gap-y-5 p-5 bg-container-primary rounded-2xl">
+  <header>
+    <app-title variant="heading-2">{{ name }}</app-title>
+  </header>
+
+  <ul class="grid grid-cols-3 gap-4 h-[80px]">
+    <li class="flex bg-container-secondary rounded-lg text-tertiary">
+      <p class="flex flex-col items-center m-auto">
+        <span class="font-bold text-4xl">{{ errors || "-" }}</span>
+        <span>errors</span>
+      </p>
+    </li>
+
+    <li class="flex">
+      <p class="flex flex-col items-center m-auto">
+        <span class="font-bold text-4xl text-primary">{{ urls || "-" }}</span>
+        <span class="text-secondary">urls</span>
+      </p>
+    </li>
+
+    <li class="flex">
+      <p class="flex flex-col items-center m-auto">
+        <span class="font-bold text-4xl text-primary">
+          {{ last_update || "10d" }}
+        </span>
+
+        <span class="text-secondary">last udpdate</span>
+      </p>
+    </li>
+  </ul>
+</article>

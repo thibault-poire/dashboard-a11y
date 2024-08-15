@@ -1,10 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { Homepage } from './features/homepage/pages/homepage/homepage';
+import { CollectionsComponent } from './features/collections/pages/collections/collections.component';
 
-export const routes: Routes = [
-  {
-    path: '',
-    component: Homepage,
-  },
-];
+export const routes: Routes = [{ component: CollectionsComponent, path: '' }];

@@ -1,0 +1,16 @@
+@switch (level) {
+  @case (1) {
+    <h1 [class]="classes">
+      <ng-container *ngTemplateOutlet="content" />
+    </h1>
+  }
+  @case (2) {
+    <h2 [class]="classes">
+      <ng-container *ngTemplateOutlet="content" />
+    </h2>
+  }
+}
+
+<ng-template #content>
+  <ng-content />
+</ng-template>
