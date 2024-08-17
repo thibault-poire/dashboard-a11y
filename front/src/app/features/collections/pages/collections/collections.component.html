@@ -1,7 +1,8 @@
 <app-layout>
   <section class="flex flex-col gap-8">
-    <header class="col-span-12">
+    <header class="col-span-12 flex items-center justify-between">
       <app-title variant="heading">Collections</app-title>
+      <app-shared-button url="/create">Create a collection</app-shared-button>
     </header>
 
     @if (collections) {
@@ -9,8 +10,11 @@
         @for (collection of collections; track collection._id) {
           <app-card
             class="col-span-1"
+            [collection_id]="collection._id"
+            [errors]="collection?.last_report?.total_errors ?? null"
             [name]="collection.name"
-            [urls]="collection.urls.length"
+            [updated_at]="collection?.last_report?.updated_at ?? null"
+            [urls]="collection?.urls?.length ?? null"
           />
         }
       </div>

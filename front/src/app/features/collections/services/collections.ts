@@ -6,7 +6,7 @@ import { Collection } from '../../../core/types/collection.type';
 export class CollectionsService {
   constructor(private http: HttpClient) {}
 
-  get_collection() {
+  get_collections() {
     return this.http.get<Collection[]>('http://localhost:1337/api/collections');
   }
 }

@@ -5,7 +5,7 @@ import Collections from "../../../mongoose/models/collections";
 
 export default async function get_collections(response: Response) {
   try {
-    const collections = await Collections.find({});
+    const collections = await Collections.find();
 
     if (collections?.length) {
       response.status(200);

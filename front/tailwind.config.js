@@ -6,6 +6,13 @@ module.exports = {
       "container-primary": "#FFFFFF",
       "container-secondary": "#000000",
       "container-tertiary": "#F2F2F2",
+      "button-container-primary": "#000000",
+      "button-container-primary-hover": "#1A1A1A",
+      "menu-container-hover": "#E6E6E6",
+    },
+
+    borderColor: {
+      "menu-list-border": "#000000",
     },
 
     fontFamily: {

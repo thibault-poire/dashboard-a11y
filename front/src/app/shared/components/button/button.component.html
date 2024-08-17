@@ -1,0 +1,13 @@
+@if (url) {
+  <a [routerLink]="url" [class]="classes">
+    <ng-container *ngTemplateOutlet="content" />
+  </a>
+} @else {
+  <button [class]="classes" (click)="handle_click()">
+    <ng-container *ngTemplateOutlet="content" />
+  </button>
+}
+
+<ng-template #content>
+  <ng-content />
+</ng-template>

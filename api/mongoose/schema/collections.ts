@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 import { urls_schema } from "./urls";
+import { last_report_schema } from "./last_report";
 
 export const collections_schema = new mongoose.Schema(
   {
@@ -12,6 +13,10 @@ export const collections_schema = new mongoose.Schema(
     urls: {
       type: [urls_schema],
       default: undefined,
+    },
+
+    last_report: {
+      type: last_report_schema,
     },
   },
   {

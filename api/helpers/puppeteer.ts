@@ -21,6 +21,8 @@ const { collection_id } = minimist(process.argv);
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
 
+      let errors = 0;
+
       for (let index = 0; index < collection.urls.length; index++) {
         const { url, _id: url_id } = collection.urls[index];
 
@@ -41,6 +43,8 @@ const { collection_id } = minimist(process.argv);
               violations,
             });
 
+            errors += violations.length;
+
             await Collections.findOneAndUpdate(
               { _id: collection_id, "urls._id": url_id },
               {
@@ -55,6 +59,14 @@ const { collection_id } = minimist(process.argv);
         } catch (error) {
           console.log(error);
         }
+      }
+
+      try {
+        await Collections.findByIdAndUpdate(collection_id, {
+          "last_report.total_errors": errors,
+        });
+      } catch (error) {
+        console.log(error);
       }
 
       await browser.close();

@@ -1,6 +1,7 @@
 <article class="grid gap-y-5 p-5 bg-container-primary rounded-2xl">
-  <header>
+  <header class="flex items-center justify-between">
     <app-title variant="heading-2">{{ name }}</app-title>
+    <app-menu [collection_id]="collection_id" />
   </header>
 
   <ul class="grid grid-cols-3 gap-4 h-[80px]">
@@ -21,10 +22,10 @@
     <li class="flex">
       <p class="flex flex-col items-center m-auto">
         <span class="font-bold text-4xl text-primary">
-          {{ last_update || "10d" }}
+          {{ time_value }}
         </span>
 
-        <span class="text-secondary">last udpdate</span>
+        <span class="text-secondary">{{ time_text }}</span>
       </p>
     </li>
   </ul>
