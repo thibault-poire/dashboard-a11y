@@ -12,11 +12,11 @@ import { MenuComponent } from '@features/collections/components/menu/menu.compon
   templateUrl: 'card.component.html',
 })
 export class CardComponent implements OnInit {
-  @Input({ required: true }) collection_id: string | null = null;
-  @Input() errors: number | null = null;
-  @Input({ required: true }) name: string | null = null;
-  @Input() urls: number | null = null;
-  @Input() updated_at: string | null = null;
+  @Input({ required: true }) collection_id: string;
+  @Input() errors?: number;
+  @Input({ required: true }) name: string;
+  @Input() urls?: number;
+  @Input() updated_at?: string;
 
   time_value: string = '-';
   time_text: string = 'last report';

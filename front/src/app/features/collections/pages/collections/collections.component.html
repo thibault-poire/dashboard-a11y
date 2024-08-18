@@ -11,10 +11,10 @@
           <app-card
             class="col-span-1"
             [collection_id]="collection._id"
-            [errors]="collection?.last_report?.total_errors ?? null"
+            [errors]="collection?.last_report?.total_errors"
             [name]="collection.name"
-            [updated_at]="collection?.last_report?.updated_at ?? null"
-            [urls]="collection?.urls?.length ?? null"
+            [updated_at]="collection?.last_report?.updated_at"
+            [urls]="collection?.urls?.length"
           />
         }
       </div>

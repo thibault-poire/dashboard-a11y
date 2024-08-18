@@ -17,17 +17,17 @@ import type { Option } from './menu.type';
   templateUrl: 'menu.component.html',
 })
 export class MenuComponent {
-  @Input({ required: true }) options: Option[] | null = null;
+  @Input({ required: true }) options: Option[];
 
-  @ViewChild('button') button: ElementRef | null = null;
-  @ViewChild('menu') menu: ElementRef | null = null;
+  @ViewChild('button') button: ElementRef;
+  @ViewChild('menu') menu: ElementRef;
 
   id: string = `menu-${crypto.randomUUID()}`;
   is_expanded = false;
 
   @HostListener('window:click', ['$event'])
-  close_menu(event: MouseEvent) {
-    const target = event.target as HTMLElement;
+  close_menu(event?: MouseEvent) {
+    const target = event?.target as HTMLElement;
 
     if (
       this.button?.nativeElement.contains(target) ||

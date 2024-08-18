@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { CollectionsService } from '@features/collections/services/collections';
 
@@ -16,12 +16,14 @@ import type { Collection } from '@core/types/collection.type';
   templateUrl: 'collections.component.html',
 })
 export class CollectionsComponent implements OnInit {
-  @Input() collections: Collection[] | null = null;
+  collections: Collection[];
 
   constructor(private collections_service: CollectionsService) {}
 
   ngOnInit() {
-    this.collections_service.get_collections().subscribe((collections) => {
+    this.collections_service.get_collections();
+
+    this.collections_service.collection$.subscribe((collections) => {
       this.collections = collections;
     });
   }

@@ -10,11 +10,11 @@ import { RouterLink } from '@angular/router';
   templateUrl: 'button.component.html',
 })
 export class ButtonComponent implements OnInit {
-  @Input() url: string | null = null;
+  @Input() url?: string;
 
   @Output() clicked = new EventEmitter<void>();
 
-  classes: string | null = null;
+  classes: string;
 
   ngOnInit() {
     this.classes =

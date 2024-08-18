@@ -8,5 +8,5 @@ import { IconName } from '../../../core/types/icons.type';
   templateUrl: 'icon.component.html',
 })
 export class IconComponent {
-  @Input({ required: true }) icon_name: IconName | null = null;
+  @Input({ required: true }) icon_name: IconName;
 }

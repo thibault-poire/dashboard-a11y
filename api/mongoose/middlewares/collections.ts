@@ -5,16 +5,18 @@ import Reports from "../models/reports";
 import { collections_schema } from "../schema/collections";
 
 collections_schema.post("findOneAndDelete", async function (document) {
-  const reports =
-    document?.urls.reduce((previous, current) => {
-      return [...previous, ...(current?.reports ?? [])];
-    }, []) ?? [];
+  if (document?.urls?.length) {
+    const reports =
+      document.urls.reduce((previous, current) => {
+        return [...previous, ...(current.reports ?? [])];
+      }, []) ?? [];
 
-  try {
-    await Reports.deleteMany({ _id: { $in: reports } });
-  } catch (error) {
-    if (error instanceof MongooseError) {
-      console.log(error);
+    try {
+      await Reports.deleteMany({ _id: { $in: reports } });
+    } catch (error) {
+      if (error instanceof MongooseError) {
+        console.log(error);
+      }
     }
   }
 });
